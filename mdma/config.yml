@@ -1,0 +1,97 @@
+nb_bins: 31
+reward_bin_radius: 3
+fps: 60
+icon_name: 'icon'
+nb_frames_pressed_trigger: 5
+
+screen:
+  width: 1000
+  height: 600
+
+start:
+  logo: 'mdma'
+
+background:
+  text: 'MOE'
+  color: '#f2f2f7'
+
+pool:
+  dot:
+    radius: 5
+    color: '#ecc94b'
+  margin_left: 14
+  margin_top: 8
+  font:
+    name: 'Satoshi-Bold'
+    size: 20
+    color: '#ecc94b'
+
+pool_name:
+  expand_ratio: 1.1
+  margin_ratio: 0.05
+  text_space: 8
+  font:
+    name: 'Satoshi-Bold'
+    size: 30
+    color: '#1a202c'
+  logo_size: 26
+  token1: 'MOE'
+  logo1: 'moe'
+  token2: 'MNT'
+  logo2: 'mnt'
+
+bin:
+  margin_ratio: 0.05
+  ratio:
+    space: 0.1
+    height: 0.4
+    user_height: 0.8
+  color:
+    reward: '#fdeaf0'
+    left: '#d8b3fd'
+    right: '#b483e7'
+
+card:
+  margin_ratio:
+    top: 0.20
+    default: 0.05
+  border_radius: 16
+  color: '#fcfcff'
+
+score:
+  expand_ratio: 1.2
+  margin_ratio: 0.05
+  border_radius: 16
+  color: '#fcfcff'
+  font:
+    number:
+      name: 'Satoshi-Bold'
+      size: 20
+      color: '#1a202c'
+    token:
+      name: 'Satoshi-Regular'
+      size: 20
+      color: '#757b7b'
+  logo: 'moe'
+  text_space: 4
+
+timer:
+  limit: 2419200
+  expand_ratio: 1.1
+  margin_ratio: 0.05
+  color: '#f2f2f7'
+  font:
+    name: 'Satoshi-Bold'
+    size: 20
+    color: '#1a202c'
+  rate: 3000
+
+button:
+  color: '#fe78a8'
+  color_focus: '#e96494'
+  font:
+    name: 'Satoshi-Bold'
+    size: 20
+    color: '#ffffff'
+  border_radius: 10
+  expand_ratio: 2

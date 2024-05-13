@@ -1,0 +1,30 @@
+line-length = 79
+
+[lint]
+# See https://beta.ruff.rs/docs/rules/ for the list of rules.
+select = [
+  # pycodestyle errors
+  'E',
+  # pycodestyle warnings
+  'W',
+  # pyflakes
+  'F',
+  # isort
+  'I',
+  # flake8-comprehensions
+  'C4',
+  # flake8-bugbear
+  'B',
+  # flake8-logging-format
+  'G'
+]
+
+ignore = [
+  # Instances not being garbage-collected because of functools.cache on methods
+  # is not a concern because all instances are supposed to be kept in memory
+  # until the end of the program execution.
+  'B019',
+  # The difference in exception handling is so minor that it's not worth the
+  # trouble.
+  'B904'
+]

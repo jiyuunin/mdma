@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    branches: [ 'master' ]
+
+jobs:
+  release:
+    name: Test Python ${{ matrix.py }} on ${{ matrix.os }}
+    permissions:
+      contents: write
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        py:
+          - '3.9'
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+        include:
+          - os: macos-latest
+            old_executable: mdma
+            new_executable: mdma-macos
+          - os: ubuntu-latest
+            old_executable: mdma
+            new_executable: mdma-linux
+          - os: windows-latest
+            old_executable: mdma.exe
+            new_executable: mdma-windows.exe
+      max-parallel: 1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.py }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.py }}
+      - name: Install tox
+        run: python -m pip install tox
+      # Specify which version of Python to use in Tox by using the TOXENV
+      # variable.
+      - name: Set environment for tox
+        run: |
+          import os
+          from sys import version_info
+          env = 'TOXENV=py{0}{1}'.format(version_info.major, version_info.minor)
+          with open(os.environ['GITHUB_ENV'], 'a') as file_handler:
+              file_handler.write(env)
+        shell: python
+      - name: Generate executable
+        run: tox -e pkg
+      - name: Rename file
+        run: mv dist/${{ matrix.old_executable }} ${{ matrix.new_executable }}
+      - name: Get tag
+        id: tag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+        with:
+          fallback: 0.1.0
+      - name: Release executable
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          files: ${{ matrix.new_executable }}
